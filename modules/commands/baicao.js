@@ -56,7 +56,7 @@ module.exports.handleEvent = async ({ event, api, Users, Currencies }) => {
 		if (values.chiabai != 1) return;
 		const player = values.player.find(item => item.id == senderID);
 		if (player.ready == true) return;
-		const name = global.data.userName.get(player.id) || await Users.getNameUser(player.id);
+		const name = (await Users.getData(player.id)).name || await Users.getNameUser(player.id);
 		values.ready += 1;
 		player.ready = true;
 		api.sendMessage(`⚡️Người chơi: ${name} Đã sẵn sàng lật bài, còn lại: ${values.player.length - values.ready} người chơi chưa lật bài`, event.threadID);
@@ -70,7 +70,7 @@ module.exports.handleEvent = async ({ event, api, Users, Currencies }) => {
 			var ranking = [], num = 1;
 
 			for (const info of player) {
-				const name = global.data.userName.get(info.id) || await Users.getNameUser(info.id);
+				const name = (await Users.getData(info.id)).name || await Users.getNameUser(info.id);
 				ranking.push(`${num++} • ${name} với ${info.card1} | ${info.card2} | ${info.card3} => ${info.tong} nút\n`);
 			}
 
@@ -88,7 +88,7 @@ module.exports.handleEvent = async ({ event, api, Users, Currencies }) => {
 		var msg = [];
 
 		for (const info of data) {
-			const name = global.data.userName.get(info.id) || await Users.getNameUser(info.id);
+			const name = (await Users.getData(info.id)).name || await Users.getNameUser(info.id);
 			msg.push(name);
 		}
 		if (msg.length != 0) return api.sendMessage("⚡️Những người chơi chưa ready bao gồm: " + msg.join(", "), threadID);
