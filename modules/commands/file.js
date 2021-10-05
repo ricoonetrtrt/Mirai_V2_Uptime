@@ -2,7 +2,7 @@ module.exports.config = {
     name: "file",
     version: "1.0.1",
     hasPermssion: 2,
-    credits: "JRT",
+    credits: "NTKhang",
     description: "Xóa file hoặc folder trong thư mục commands",
     commandCategory: "Admin",
     usages: "\ncommands start <text>\ncommands ext <text>\ncommands <text>\ncommands [để trống]\ncommands help\nNOTE: <text> là ký tự bạn điền vào tùy ý",
